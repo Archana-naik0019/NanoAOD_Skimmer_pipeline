@@ -84,15 +84,20 @@ do
     echo "Running nano_reduce.py..."
 
     if [ "$IS_DATA" = "1" ]; then
-        CONFIG="core/config_data.py"
+        CONFIG="HtoAAtobbgg/config_data.py"
     else
-        CONFIG="core/config.py"
+        CONFIG="HtoAAtobbgg/config.py"
     fi
+
+    OBJECT_FILE="HtoAAtobbgg/object_selection.py"
+    EVENT_FILE="HtoAAtobbgg/event.py"
 
     SKIMMER_ARGS=(
         --input "$INPUT"
         --output "$OUTPUT_LOCAL"
         --config "$CONFIG"
+        --object_selection_file "$OBJECT_FILE"
+        --event_selection_file "$EVENT_FILE"
         --apply_pixelSeed
         --apply_bJet_tagger
         --apply-jet-selection

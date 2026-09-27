@@ -26,8 +26,7 @@ DEFAULT_JSON = (
 
 EOS_BASE = (
     "/eos/user/b/bbapi/"
-    "My_Analysis/2024_efficiency_study/"
-    "Backgrounds/Skimmer"
+    "My_Analysis/NanoSkimmer_new"
 )
 
 EXECUTABLE = "run_skimmer.sh"
@@ -36,8 +35,7 @@ EXECUTABLE = "run_skimmer.sh"
 CONDOR_LOG_BASE = (
     "root://eosuser.cern.ch//"
     "eos/user/b/bbapi/"
-    "My_Analysis/2024_efficiency_study/"
-    "Backgrounds/Skimmer/condor_logs"
+    "My_Analysis/condor_logs"
 )
 
 
@@ -454,7 +452,7 @@ def submit_dataset(dataset):
             f"{os.path.abspath(EXECUTABLE)},"
             f"{os.path.abspath('nano_reduce.py')},"
             f"{os.path.abspath('core')},"
-            f"{os.path.abspath('selection')}\n\n"
+            f"{os.path.abspath('HtoAAtobbgg')}\n\n"
         )
 
         # ----------------------------------------------------

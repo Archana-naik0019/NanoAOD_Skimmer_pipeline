@@ -14,6 +14,7 @@ It uses **Uproot** and **Awkward Array** for ROOT I/O and event processing and s
 - Configurable branch removal through `config.py` and `config_data.py`.
 - Object-level selections for jets, electrons, muons and photons.
 - Event-level selection and cutflow bookkeeping.
+- Optional lumi masking
 - Optional HLT trigger selection for data.
 - Optional photon pixel-seed selection.
 - Optional b-jet tagger selection.
@@ -28,26 +29,26 @@ It uses **Uproot** and **Awkward Array** for ROOT I/O and event processing and s
 
 ```text
 NanoSkimmer/
+├── core
+│   ├── event_store.py
+│   ├── __init__.py
+│   ├── __pycache__
+│   ├── reader.py
+│   ├── reducer.py
+│   └── writer.py
+├── HtoAAto4g
+│   ├── config_data.py
+│   ├── config.py
+│   └── event.py
+├── HtoAAtobbgg
+│   ├── config_data.py
+│   ├── config.py
+│   ├── event.py
+│   └── object_selection.py
 ├── nano_reduce.py
+├── README.md
 ├── run_skimmer.sh
-├── submit_skimmer.py
-│
-├── core/
-│   ├── __init__.py
-│   ├── config.py
-│   ├── config_data.py
-│   ├── event_store.py
-│   ├── reader.py
-│   ├── reducer.py
-│   └── writer.py
-│
-└── selection/
-    ├── __init__.py
-    ├── electron.py
-    ├── event.py
-    ├── jet.py
-    ├── muon.py
-    └── photon.py
+└── submit_skimmer.py
 ```
 
 ### Main Components
@@ -67,13 +68,16 @@ Temporary container used to hold collections, scalar branches, weights, metadata
 **`core/writer.py` — `NanoWriter`**  
 Writes the selected events to ROOT using Uproot. It also creates a `Metadata` tree and handles output splitting.
 
-**`selection/`**  
-Contains the object and event selection functions.
+**`object_selection.py`**  
+Contains the object selection functions.
 
-**`core/config.py`**  
+**`event.py`**  
+Contains the event selection functions.
+
+**`config.py`**  
 Configuration used for MC processing.
 
-**`core/config_data.py`**  
+**`config_data.py`**  
 Configuration used for data processing.
 
 **`run_skimmer.sh`**  
@@ -108,21 +112,21 @@ Make sure the required Python packages are available in the environment.
 From inside the `NanoSkimmer` directory:
 
 ```bash
-python3 nano_reduce.py --input input.root --output skim.root --config core/config.py
+python3 nano_reduce.py --input input.root --output skim.root --config --config HtoAAtobbgg/config.py 
 ```
 
-By default this uses the MC configuration.
+By default this uses the MC configuration and only drops branches.
 
 ### Process Data
 
 ```bash
-python3 nano_reduce.py --input input.root --output skim.root --data --config core/config_data.py
+python3 nano_reduce.py --input input.root --output skim.root --data --config HtoAAtobbgg/config_data.py
 ```
 
 ### Apply the Data Trigger Selection
 
 ```bash
-python3 nano_reduce.py --input input.root --output skim.root --data --apply_trigger --config core/config.py
+python3 nano_reduce.py --input input.root --output skim.root --data --apply_trigger --config HtoAAtobbgg/config_data.py
 ```
 
 ### Optional Selections
@@ -130,25 +134,25 @@ python3 nano_reduce.py --input input.root --output skim.root --data --apply_trig
 Apply the photon pixel-seed selection:
 
 ```bash
-python3 nano_reduce.py --input input.root --output skim.root --apply_pixelSeed --config core/config.py
+python3 nano_reduce.py --input input.root --output skim.root --apply_pixelSeed --config HtoAAtobbgg/config.py --object_selection_file HtoAAtobbgg/object_selection.py --event_selection_file HtoAAtobbgg/event.py
 ```
 
 Apply the b-jet tagger selection:
 
 ```bash
-python3 nano_reduce.py --input input.root --output skim.root --apply_bJet_tagger --config core/config.py
+python3 nano_reduce.py --input input.root --output skim.root --apply_bJet_tagger --config HtoAAtobbgg/config.py --object_selection_file HtoAAtobbgg/object_selection.py --event_selection_file HtoAAtobbgg/event.py
 ```
 
 Apply jet kinematic cuts:
 
 ```bash
-python3 nano_reduce.py --input input.root --output skim.root --apply_kinematic_cuts_jet --config core/config.py
+python3 nano_reduce.py --input input.root --output skim.root --apply_kinematic_cuts_jet --config HtoAAtobbgg/config.py --object_selection_file HtoAAtobbgg/object_selection.py --event_selection_file HtoAAtobbgg/event.py
 ```
 
 Multiple options can be combined:
 
 ```bash
-python3 nano_reduce.py --input input.root --output skim.root --apply_pixelSeed --apply_bJet_tagger --config core/config.py
+python3 nano_reduce.py --input input.root --output skim.root --apply_pixelSeed --apply_bJet_tagger --config HtoAAtobbgg/config.py --object_selection_file HtoAAtobbgg/object_selection.py --event_selection_file HtoAAtobbgg/event.py
 ```
 
 ### Apply object selections
@@ -156,7 +160,7 @@ python3 nano_reduce.py --input input.root --output skim.root --apply_pixelSeed -
 Individual selection stages can be enabled:
 
 ```bash
-python3 nano_reduce.py --input input.root --output skim.root --apply-jet-selection --config core/config.py
+python3 nano_reduce.py --input input.root --output skim.root --apply-jet-selection --config HtoAAtobbgg/config.py --event_selection_file HtoAAtobbgg/event.py
 ```
 
 Available options:
@@ -214,8 +218,8 @@ MAX_EVENTS_PER_FILE = 500000
 This is configured independently in:
 
 ```text
-core/config.py
-core/config_data.py
+config.py
+config_data.py
 ```
 
 If the skim contains more than the configured number of events, the output is split automatically:
