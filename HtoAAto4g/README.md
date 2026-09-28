@@ -3,6 +3,17 @@ Additionally, a second tier of skimming is performed via [`HtoAAto4g/event.py`](
 - Lumi-based filtering (specific to data)
 - High-Level Trigger (HLT) filtering (specific to data)
 - Basic photon selection cuts (For both data and MC)
+  ### Available Selection Options
+
+```text
+--cut_4photons
+--cut_eta
+--cut_pixel_seed
+--cut_pt
+--apply_lumi_mask
+```
+
+The individual event selections can be enabled independently.
 
 ## How to run
 
