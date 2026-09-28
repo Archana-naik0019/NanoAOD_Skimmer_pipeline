@@ -10,20 +10,20 @@ Additionally, a second tier of skimming is performed via [`HtoAAto4g/event.py`](
   To run the skimmer interactively on a single ROOT file or a test sample, use the following command (this applies all the event selection cuts defined in [`HtoAAto4g/event.py`](https://github.com/Archana-naik0019/NanoAOD_Skimmer_pipeline/blob/main/HtoAAto4g/event.py)):
     ```bash
     python3 nano_reduce.py --input <input file name> --output <output file name> --apply_trigger --data --config HtoAAto4g/config_data.py --event_selection_file HtoAAto4g/event.py --apply-event-selection --apply_lumi_mask --lumimask_json <Golden.json file name>
-
+    ```
   To run the skimmer while applying specific cuts from those defined in [`HtoAAto4g/event.py`](https://github.com/Archana-naik0019/NanoAOD_Skimmer_pipeline/blob/main/HtoAAto4g/event.py) :
    ```bash
    python3 nano_reduce.py --input <input file name> --output <output file name> --apply_trigger --data --config HtoAAto4g/config_data.py --event_selection_file HtoAAto4g/event.py --cut_4photons --cut_pt
-
+   ```
  To run the skimmer while applying no event-selection cuts and only pruning the NanoAOD to drop unused branches:
   ```bash
    python3 nano_reduce.py --input <input file name> --output <output file name> --data --config HtoAAto4g/config_data.py
-
+  ```
 2. **Condor Submission**
   To submit jobs on HT Condor, use the script, use the following command:
    ```bash
     python3 submit_skimmer.py python3 submit_skimmer.py --dataset <specify the datasets from samples.json that are to be skimmed> --json <samples.json>
-
+   ```
 ## Important Notes
 
 - The input NanoAOD file must contain the branches requested by the selected configuration.
