@@ -6,10 +6,10 @@
 MAX_EVENTS_PER_FILE = 500000
 
 COLLECTIONS = [
-    "Jet",
+    "Jet", #We won't need the whole collection in our analysis, but HiggsDNA crashes in its absence since the current base.py has jerc corrections defined (but never used). So may remove the branches listed in 'DROP_FIELDS' from jets collections if the 'jerc' correction lines are commented out from base.py
     "Photon",
-    "Electron",
-    #"Muon",
+    "Electron", #Not directly used in the analysis, but HiggsDNA crashes since the base.py stores electron raw pt (They are not used in the downstream analysis)
+    #"Muon", # won't need the whole collection in our analysis
     "PuppiMET",
     #"PFMET",
     "PV",
@@ -97,7 +97,7 @@ DROP_FIELDS = {
         "Jet_neHEF",     
         "Jet_puIdDisc",   
         "Jet_rawFactor"
-    ],
+    ], #{"pt","eta","phi","neEmEF","chEmEF"} fields from the Jet collection are required for the ECAL bad crystal removal (higgs_dna/tools/EcalBadCalibCrystal_events.py), HiggsDNA crashes without this.
     '''
 
     "PuppiMET": [
@@ -112,6 +112,6 @@ DROP_FIELDS = {
         "PuppiMET_sumEt",
         "PuppiMET_sumPtUnclustered"
 
-    ]
+    ] #{"pt","phi"}fields from the PuppiMET collection are required for the ECAL bad crystal removal (higgs_dna/tools/EcalBadCalibCrystal_events.py), HiggsDNA crashes without this.
 
 }
