@@ -1,6 +1,7 @@
 # NanoSkimmer
 
 **Developed by Bapi Basak | IISER Pune | August 2026**
+**Co-author: Archana Nayek**
 
 NanoSkimmer is a Python-based NanoAOD skimming framework designed to reduce CMS NanoAOD ROOT files by applying object-level and event-level selections while retaining the branches needed for analysis.
 
@@ -112,7 +113,7 @@ Make sure the required Python packages are available in the environment.
 From inside the `NanoSkimmer` directory:
 
 ```bash
-python3 nano_reduce.py --input input.root --output skim.root --config --config HtoAAtobbgg/config.py 
+python3 nano_reduce.py --input input.root --output skim.root --config <analysis_dir>/config.py 
 ```
 
 By default this uses the MC configuration and only drops branches.
@@ -120,13 +121,13 @@ By default this uses the MC configuration and only drops branches.
 ### Process Data
 
 ```bash
-python3 nano_reduce.py --input input.root --output skim.root --data --config HtoAAtobbgg/config_data.py
+python3 nano_reduce.py --input input.root --output skim.root --data --config <analysis_dir>/config_data.py
 ```
 
 ### Apply the Data Trigger Selection
 
 ```bash
-python3 nano_reduce.py --input input.root --output skim.root --data --apply_trigger --config HtoAAtobbgg/config_data.py
+python3 nano_reduce.py --input input.root --output skim.root --data --apply_trigger --config <analysis_dir>/config_data.py
 ```
 
 ### Optional Selections
@@ -134,25 +135,25 @@ python3 nano_reduce.py --input input.root --output skim.root --data --apply_trig
 Apply the photon pixel-seed selection:
 
 ```bash
-python3 nano_reduce.py --input input.root --output skim.root --apply_pixelSeed --config HtoAAtobbgg/config.py --object_selection_file HtoAAtobbgg/object_selection.py --event_selection_file HtoAAtobbgg/event.py
+python3 nano_reduce.py --input input.root --output skim.root --apply_pixelSeed --config <analysis_dir>/config.py --object_selection_file <analysis_dir>/object_selection.py --event_selection_file <analysis_dir>/event.py
 ```
 
 Apply the b-jet tagger selection:
 
 ```bash
-python3 nano_reduce.py --input input.root --output skim.root --apply_bJet_tagger --config HtoAAtobbgg/config.py --object_selection_file HtoAAtobbgg/object_selection.py --event_selection_file HtoAAtobbgg/event.py
+python3 nano_reduce.py --input input.root --output skim.root --apply_bJet_tagger --config <analysis_dir>/config.py --object_selection_file <analysis_dir>/object_selection.py --event_selection_file <analysis_dir>/event.py
 ```
 
 Apply jet kinematic cuts:
 
 ```bash
-python3 nano_reduce.py --input input.root --output skim.root --apply_kinematic_cuts_jet --config HtoAAtobbgg/config.py --object_selection_file HtoAAtobbgg/object_selection.py --event_selection_file HtoAAtobbgg/event.py
+python3 nano_reduce.py --input input.root --output skim.root --apply_kinematic_cuts_jet --config <analysis_dir>/config.py --object_selection_file <analysis_dir>/object_selection.py --event_selection_file <analysis_dir>/event.py
 ```
 
 Multiple options can be combined:
 
 ```bash
-python3 nano_reduce.py --input input.root --output skim.root --apply_pixelSeed --apply_bJet_tagger --config HtoAAtobbgg/config.py --object_selection_file HtoAAtobbgg/object_selection.py --event_selection_file HtoAAtobbgg/event.py
+python3 nano_reduce.py --input input.root --output skim.root --apply_pixelSeed --apply_bJet_tagger --config <analysis_dir>/config.py --object_selection_file <analysis_dir>/object_selection.py --event_selection_file <analysis_dir>/event.py
 ```
 
 ### Apply object selections
@@ -160,7 +161,7 @@ python3 nano_reduce.py --input input.root --output skim.root --apply_pixelSeed -
 Individual selection stages can be enabled:
 
 ```bash
-python3 nano_reduce.py --input input.root --output skim.root --apply-jet-selection --config HtoAAtobbgg/config.py --event_selection_file HtoAAtobbgg/event.py
+python3 nano_reduce.py --input input.root --output skim.root --apply-jet-selection --config <analysis_dir>/config.py --event_selection_file <analysis_dir>/event.py
 ```
 
 Available options:
@@ -440,3 +441,5 @@ NanoAOD ROOT file
 **Bapi Basak**  
 **IISER Pune**  
 **August 2026**
+
+**Co-author: Archana Nayek**
