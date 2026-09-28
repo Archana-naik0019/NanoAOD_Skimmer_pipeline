@@ -2,7 +2,7 @@
 
 **Developed by Bapi Basak | IISER Pune | August 2026**
 
-**Co-author: Archana Nayek**
+**Co-author: Archana Naik**
 
 NanoSkimmer is a Python-based NanoAOD skimming framework designed to reduce CMS NanoAOD ROOT files by applying object-level and event-level selections while retaining the branches needed for analysis.
 
@@ -443,4 +443,4 @@ NanoAOD ROOT file
 **IISER Pune**  
 **August 2026**
 
-**Co-author: Archana Nayek**
+**Co-author: Archana Naik**
